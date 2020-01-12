@@ -3,6 +3,7 @@ package fx;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.CheckBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -18,6 +19,8 @@ import java.util.logging.Level;
 public class Window {
     @FXML
     private BarChart<String, Integer> graph;
+    @FXML
+    public CheckBox box;
 
     @FXML
     private void initialize() {
@@ -33,7 +36,7 @@ public class Window {
         Stage stage = (Stage) graph.getScene().getWindow();
         File file = dialog.showOpenDialog(stage);
         try {
-            Map<String, Integer> words = WordCounter.getWordCount(file);
+            Map<String, Integer> words = WordCounter.getWordCount(file,box.isSelected());
             showTopTen(words);
         } catch (ExecutionException | InterruptedException | IOException e) {
             e.printStackTrace();
@@ -48,7 +51,7 @@ public class Window {
         Comparator<Pair<String, Integer>> c = Comparator.comparingInt(Pair::getValue);
         ls.sort(c.reversed());
         for (int i = 0; i < Math.min(100, ls.size()); i++) {
-            WordCounter.LOG.log(Level.FINE, ls.get(i).getKey() + ": " + ls.get(i).getValue());
+            WordCounter.LOG.log(Level.INFO, ls.get(i).getKey() + ": " + ls.get(i).getValue());
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>("", ls.get(i).getValue()));
             series.setName(ls.get(i).getKey());

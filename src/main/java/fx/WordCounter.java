@@ -54,13 +54,13 @@ public class WordCounter extends Application {
         return out;
     }
 
-    public static Map<String, Integer> getWordCount(final File file) throws ExecutionException, InterruptedException, IOException {
+    public static Map<String, Integer> getWordCount(final File file, final boolean filter) throws ExecutionException, InterruptedException, IOException {
         final int THREADS = Runtime.getRuntime().availableProcessors();
         LOG.log(Level.INFO, "Starting " + THREADS + " Threads");
         FutureTask<Map<String, Integer>>[] futures = new FutureTask[THREADS];
         String[] txt = getTxt(THREADS, file);
         for (int i = 0; i < THREADS; i++) {
-            futures[i] = new FutureTask<>(new WordCounterThread(txt[i]));
+            futures[i] = new FutureTask<>(new WordCounterThread(txt[i],filter));
             new Thread(futures[i]).start();
         }
         Map<String, Integer> out = new HashMap<>();
