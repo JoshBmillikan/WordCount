@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.17.0'
+}
+
+apply plugin: 'idea'
+compileJava {
+    sourceCompatibility = 13
+    targetCompatibility = 13
+}
+group 'josh'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 13
+mainClassName = 'fx.WordCounter'
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.fxml','javafx.controls','javafx.base','javafx.graphics','javafx.web' ]
+}
+jlink {
+//    mergedModule {
+//        requires 'java.xml'
+//    }
+    launcher {
+        name = 'DnDUtilities'
+    }
+}
+
+
+dependencies {
+    compile 'org.apache.commons:commons-text:1.8'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
