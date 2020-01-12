@@ -21,7 +21,7 @@ repositories {
 
 javafx {
     version = "13"
-    modules = [ 'javafx.fxml','javafx.controls','javafx.base','javafx.graphics','javafx.web' ]
+    modules = ['javafx.fxml', 'javafx.controls', 'javafx.base', 'javafx.graphics', 'javafx.web']
 }
 jlink {
 //    mergedModule {
