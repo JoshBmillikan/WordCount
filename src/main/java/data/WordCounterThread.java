@@ -36,7 +36,8 @@ public class WordCounterThread implements Callable<Map<String, Integer>> {
                         break;
                     }
                 }
-            } else if(word.equalsIgnoreCase("") || word.equalsIgnoreCase(" "))
+            }
+            else if(word.equalsIgnoreCase("") || word.equalsIgnoreCase(" "))
                 isIgnored = true;
 
             if (!isIgnored) {

@@ -39,7 +39,7 @@ public class Window {
             Map<String, Integer> words = WordCounter.getWordCount(file,box.isSelected());
             showTopTen(words);
         } catch (ExecutionException | InterruptedException | IOException e) {
-            e.printStackTrace();
+            WordCounter.LOG.log(Level.SEVERE,e.getMessage());
         }
     }
 

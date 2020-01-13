@@ -23,7 +23,6 @@ public class WordCounter extends Application {
     public static final Logger LOG = Logger.getGlobal();
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
@@ -36,22 +35,6 @@ public class WordCounter extends Application {
         primaryStage.setTitle("Word Count");
         primaryStage.setMaximized(true);
         primaryStage.show();
-    }
-
-    private static String[] getTxt(final int arraySize, final File file) throws IOException {
-        if (!file.exists() || file.isDirectory())
-            throw new IOException("Target is not a valid file to read");
-        String[] out = new String[arraySize];
-        Arrays.fill(out, "");
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        int i = 0;
-        while (reader.ready()) {
-            if (i >= out.length)
-                i = 0;
-            out[i] = out[i].concat(reader.readLine() + "\n");
-            i++;
-        }
-        return out;
     }
 
     public static Map<String, Integer> getWordCount(final File file, final boolean filter) throws ExecutionException, InterruptedException, IOException {
@@ -72,6 +55,22 @@ public class WordCounter extends Application {
                     out.replace(word, val);
                 } else out.put(word, result.get(word));
             }
+        }
+        return out;
+    }
+
+    private static String[] getTxt(final int arraySize, final File file) throws IOException {
+        if (!file.exists() || file.isDirectory())
+            throw new IOException("Target is not a valid file to read");
+        String[] out = new String[arraySize];
+        Arrays.fill(out, "");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        int i = 0;
+        while (reader.ready()) {
+            if (i >= out.length)
+                i = 0;
+            out[i] = out[i].concat(reader.readLine() + "\n");
+            i++;
         }
         return out;
     }
