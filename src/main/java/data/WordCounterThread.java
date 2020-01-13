@@ -45,7 +45,7 @@ public class WordCounterThread implements Callable<Map<String, Integer>> {
                     int val = out.get(word);
                     val++;
                     out.replace(word, val);
-                } else out.put(word, 0);
+                } else out.put(word, 1);
             }
         }
         return out;
